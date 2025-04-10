@@ -10,13 +10,72 @@
     <div class="container mt-5">
       <div class="card shadow rounded-4 p-4">
         <h2 class="mb-4 text-center">Network File Uploader</h2>
+      <div class="text-center mb-4">
+        <img src="/qr" alt="QR Code" class="img-thumbnail" style="max-width: 200px;">
+        <p class="mt-2">Scan to upload files from another device</p>
+      </div>
         <form method="post" enctype="multipart/form-data">
           <div class="mb-3">
             <input class="form-control" type="file" name="files" multiple>
           </div>
           <button type="submit" class="btn btn-primary w-100">Upload</button>
+          <div class="mt-4">
+           <label class="form-label">Current File Upload Progress</label>
+            <div class="progress mb-3">
+              <div id="fileProgress" class="progress-bar" role="progressbar" style="width: 0%">0%</div>
+            </div>
+            <label class="form-label">Total Files Uploaded</label>
+            <div class="progress">
+              <div id="totalProgress" class="progress-bar bg-success" role="progressbar" style="width: 0%">0/0</div>
+            </div>
+          </div>
         </form>
       </div>
     </div>
+    <script>
+  const form = document.querySelector('form');
+  const fileProgress = document.getElementById('fileProgress');
+  const totalProgress = document.getElementById('totalProgress');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const files = form.elements['files'].files;
+    const total = files.length;
+    let uploaded = 0;
+
+    const uploadNext = (index) => {
+      if (index >= total) {
+        return form.submit(); // fallback redirect
+      }
+
+      const xhr = new XMLHttpRequest();
+      const formData = new FormData();
+      formData.append('files', files[index]);
+
+      xhr.upload.addEventListener('progress', (e) => {
+        if (e.lengthComputable) {
+          const percent = Math.round((e.loaded / e.total) * 100);
+          fileProgress.style.width = percent + '%';
+          fileProgress.textContent = percent + '%';
+        }
+      });
+
+      xhr.onload = () => {
+        uploaded++;
+        totalProgress.style.width = Math.round((uploaded / total) * 100) + '%';
+        totalProgress.textContent = uploaded + '/' + total;
+        uploadNext(index + 1);
+      };
+
+      xhr.open('POST', '/');
+      xhr.send(formData);
+    };
+
+    totalProgress.style.width = '0%';
+    totalProgress.textContent = '0/' + total;
+    uploadNext(0);
+  });
+</script>
+
   </body>
 </html>
