@@ -3,9 +3,13 @@
 
 Collection of Python Scripts
 
-## Simple Uploader
 
 <table>
+  <tr>
+    <td colspan="2">
+      <img src="https://img.relluem94.de/logos/web/SimpleUploader.png">
+    </td>
+  </tr>
   <tr>
     <td colspan="2">
       <p>This Simple Uploader lets you quickly upload files (e.g. from your phone) to your PC over the local network — no cables, no cloud, just drag and drop.</p>
