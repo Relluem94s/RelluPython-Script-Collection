@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='BackgroundRemover_icon.png') }}">
     <title>Background Remover</title>
     <style>
         body {
@@ -40,7 +41,7 @@
 </head>
 <body>
     <div>
-        <h1>Background Remover</h1>
+        <h2><img src="{{ url_for('static', filename='BackgroundRemover.png') }}" alt="Simple Uploader Logo" style="max-width: 100%; height: auto;"></h2>
         <div class="container">
             <div class="drop-zone" id="dropZone">
                 Drag & Drop your image here or click to select
