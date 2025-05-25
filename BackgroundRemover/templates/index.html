@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Remover</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .drop-zone, .result-zone {
+            width: 45%;
+            height: 400px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 10px;
+        }
+        .drop-zone.dragover {
+            background-color: #e1f5fe;
+        }
+        .result-zone img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Background Remover</h1>
+        <div class="container">
+            <div class="drop-zone" id="dropZone">
+                Drag & Drop your image here or click to select
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+            </div>
+            <div class="result-zone" id="resultZone">
+                Result will appear here
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const resultZone = document.getElementById('resultZone');
+
+        // Handle drag and drop events
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                processImage(file);
+            } else {
+                resultZone.textContent = 'Please drop a valid image file!';
+            }
+        });
+
+        // Handle click to select file
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                processImage(fileInput.files[0]);
+            }
+        });
+
+        // Process and upload the image
+        async function processImage(file) {
+            resultZone.textContent = 'Processing...';
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to process image');
+                }
+
+                const blob = await response.blob();
+                const imageUrl = URL.createObjectURL(blob);
+                resultZone.innerHTML = `<img src="${imageUrl}" alt="Processed Image">`;
+            } catch (error) {
+                resultZone.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
