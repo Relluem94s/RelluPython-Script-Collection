@@ -35,4 +35,31 @@ Collection of Python Scripts
       <pre><code>python app.py</code></pre>
     </td>
   </tr>
+  <tr>
+    <td colspan="2">
+      <img src="https://img.relluem94.de/logos/web/BackgroundRemover.png">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <p>This Simple Uploader lets you quickly upload files (e.g. from your phone) to your PC over the local network — no cables, no cloud, just drag and drop.</p>
+    </td>
+  </tr>
+  <tr>
+    <td><img src="./img/BackgroundRemover.png" alt="Background Remover" style="max-width: 250px;"></td>
+    <td>
+      <h3>Features</h3>
+      <ul>
+        <li>Upload images and get a PNG back</li>
+      </ul>
+      <h3>Installation</h3>
+      <ol>
+        <li>Clone or download this project.</li>
+        <li>Install dependencies:</li>
+        <pre><code>pip install -r requirements.txt</code></pre>
+      </ol>
+      <h3>Usage</h3>
+      <pre><code>python app.py</code></pre>
+    </td>
+  </tr>
 </table>
