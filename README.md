@@ -42,7 +42,7 @@ Collection of Python Scripts
   </tr>
   <tr>
     <td colspan="2">
-      <p>This Simple Uploader lets you quickly upload files (e.g. from your phone) to your PC over the local network — no cables, no cloud, just drag and drop.</p>
+      <p>This App will remove your Background from a Image just drag and drop.</p>
     </td>
   </tr>
   <tr>
