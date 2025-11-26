@@ -7,7 +7,7 @@ Collection of Python Scripts
 <table>
   <tr>
     <td colspan="2">
-      <img src="https://img.relluem94.de/logos/web/SimpleUploader.png">
+      <img src="https://static.relluem94.de/logos/web/SimpleUploader.png">
     </td>
   </tr>
   <tr>
@@ -37,7 +37,7 @@ Collection of Python Scripts
   </tr>
   <tr>
     <td colspan="2">
-      <img src="https://img.relluem94.de/logos/web/BackgroundRemover.png">
+      <img src="https://static.relluem94.de/logos/web/BackgroundRemover.png">
     </td>
   </tr>
   <tr>
